@@ -17,6 +17,9 @@ const VideoDetail = ({video}) => {
         <div>{video.snippet.title}</div>
         <div>{video.snippet.description}</div>
       </div>
+      <div className="details">
+        <textarea rows="5" placeholder="Take notes here"></textarea>
+      </div>
     </div>
   )
 }

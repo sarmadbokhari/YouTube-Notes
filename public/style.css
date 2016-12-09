@@ -18,10 +18,27 @@
   border-radius: 4px;
 }
 
+.video-detail .details:last-child {
+  margin-bottom: 10px;
+}
+
 .list-group-item {
   cursor: pointer;
 }
 
 .list-group-item:hover {
   background-color: #eee;
+}
+
+textarea{
+  display:block;
+  box-sizing: padding-box;
+  overflow:hidden;
+
+  padding:10px;
+  width:100%;
+  font-size:14px;
+  border-radius:6px;
+  box-shadow:2px 2px 8px rgba(0,0,0,.3);
+  border:0;
 }
