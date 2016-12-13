@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import firebase from 'firebase';
+
 import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
@@ -8,13 +10,24 @@ import VideoDetail from './components/video_detail';
 
 const API_KEY = 'AIzaSyCEJL_slchux4OqH_rjCuCzZA9OPwETNEM';
 
+const config = {
+    apiKey: "AIzaSyDQ2leh8_DQLLmYpEeKgmAHDEkq8SIPD7E",
+    authDomain: "yt-notes.firebaseapp.com",
+    databaseURL: "https://yt-notes.firebaseio.com",
+    storageBucket: "yt-notes.appspot.com",
+    messagingSenderId: "145698927067"
+};
+
+firebase.initializeApp(config);
+
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       videos: [],
-      selectedVideo: null
+      selectedVideo: null,
+      fbItems: []
     };
 
     this.videoSearch('ertugrul episode 1 english subtitles');
@@ -29,8 +42,22 @@ class App extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.props.firebaseRef.ref('notes').on('value', function(dataSnapshot) {
+      this.setState({
+        fbItems: dataSnapshot.val()
+      });
+    }.bind(this));
+  }
+
   render() {
     const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300);
+
+    if (!this.state.fbItems) {
+      return <div>Loading...</div>;
+    }
+
+    console.log(this.state.fbItems);
 
     return (
       <div>
@@ -44,4 +71,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('component'));
+ReactDOM.render(<App firebaseRef={firebase.database()} />, document.getElementById('component'));

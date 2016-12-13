@@ -20,10 +20,6 @@ class SearchBar extends React.Component {
     this.setState({term: term});
     this.props.onSearchTermChange(term);
   }
-
-  update(event) {
-    this.setState({ term: event.target.value });
-  }
 }
 
 export default SearchBar;
