@@ -12,6 +12,14 @@ class SearchBar extends React.Component {
         <input
           value={this.state.term}
           onChange={ event => this.onInputChange(event.target.value) } />
+
+        <div className="nav-menu">
+          <ul>
+            <li><a href="/notes">My notes</a></li>
+            <li>Login</li>
+            <li>Sign up</li>
+          </ul>
+        </div>
       </div>
     );
   }
